@@ -12,7 +12,9 @@ const authRoute = require("./routes/auth");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
+// On retire un éventuel slash final ("http://localhost:3000/" -> "http://localhost:3000") :
+// pour CORS, ces deux valeurs sont deux origines différentes, une simple faute
+const CLIENT_URL = (process.env.CLIENT_URL || 'http://localhost:3000').replace(/\/+$/, '');
 
 app.use(
   session({
